@@ -35,5 +35,9 @@ class DivisionController extends Controller
         return view('division', ['divisions' => $divisions]);
     }
 
+    function getRegister()
+    {
+        return view('division_register');
+    }
 
 }

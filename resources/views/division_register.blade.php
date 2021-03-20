@@ -10,6 +10,9 @@
     <link href="{{ asset('assets/css/untitled.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/bootstrap/js/fonts/fontawesome-all.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href={{ asset('css/company.css') }} rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <base href="{{asset('')}}">
     <script>
         function show() {
             var x = document.getElementById("services");
@@ -21,6 +24,12 @@
                 document.getElementById("logo").removeAttribute("class");
             }
         }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
 </head>
 <body id="page-top">
@@ -33,7 +42,7 @@
                 <div id="phuong" class="phuong" style="width: 98%; margin-left: 0%">
                     <div id="all">
                         <div id="first_body">
-                            Devison Register
+                            Division Register
                         </div>
                         <br> <br>
                         <form action="" method="post">
@@ -41,31 +50,43 @@
                             <table style="width: 50%; float:left">
                                 <tr>
                                     <td>Company</td>
-                                    <td><input type="text" style="width: 80px;color: gray" placeholder="Company code"
-                                               name="cpn_id">
-                                        <input type="text" name="cpn_name" placeholder="Company name"></td>
+                                    <td>
+                                        <input type="text" style="width: 80px;color: gray" placeholder="Company code"
+                                               name="cpn_id" id="cpn_id" onkeyup="getCompany()" required>
+                                        <input type="text" name="cpn_name" placeholder="Company name" readonly
+                                               id="cpn_name" required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Branch Name</td>
-                                    <td><input type="text" style="width: 80px;color: gray" placeholder="Branch code"
-                                               name="br_id">
-                                        <input type="text" name="br_name" placeholder="Branch name"></td>
+                                    <td>
+                                        <input type="text" style="width: 80px;color: gray" placeholder="Branch code"
+                                               name="br_id" id="br_id" onkeyup="getBranch()" required>
+                                        <input type="text" name="br_name" placeholder="Branch name" readonly
+                                               id="br_name" required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Division</td>
-                                    <td><input id="name" style="width: 300px" type="text"
-                                               placeholder="Please enter Division Name" name="name" required></td>
+                                    <td>
+                                        <input id="name" style="width: 300px" type="text"
+                                               placeholder="Please enter Division Name" name="name" required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Project</td>
-                                    <td><input style="width: 300px" type="text" placeholder="Please enter project Name"
-                                               name="project" required></td>
+                                    <td>
+                                        <input style="width: 300px" type="text" placeholder="Please enter project Name"
+                                               name="project" required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>PM</td>
-                                    <td><select>
+                                    <td>
+                                        <select>
                                             <option>Demo</option>
-                                        </select></td>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
@@ -124,11 +145,32 @@
     </div>
 </div>
 <script language="javascript">
+    function getCompany() {
+        var cpn_id = $("#cpn_id").val();
+        $.ajax({
+            type: "get",
+            url: 'dashboard/ajax/company/' + cpn_id,
+            success: function (res) {
+                $("#cpn_name").val(res);
+            }
+        });
+    }
+
+    function getBranch() {
+        var br_id = $("#br_id").val();
+        var cpn_id = $("#cpn_id").val();
+        $.ajax({
+            type: "get",
+            url: 'dashboard/ajax/branch/' + cpn_id + "/" + br_id,
+            success: function (res) {
+                $("#br_name").val(res);
+            }
+        });
+    }
 
     document.getElementById("exit").onclick = function () {
         document.getElementById("phuong").style.display = 'none';
     };
-
 </script>
 </body>
 </html>

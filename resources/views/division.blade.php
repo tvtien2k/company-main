@@ -86,11 +86,13 @@
                             </table>
                             <hr style="margin-top: 40px">
                             <div id="body_button">
-                                <a href="" style="text-decoration: none;    margin-left: 10px;">
+                                <a href="{{route('division_register.get')}}"
+                                   style="text-decoration: none;    margin-left: 10px;">
                                     <button type="button" name="register" style="background-color: #30c0f0"> Register
                                     </button>
                                 </a>
-                                <button type="submit" name="search" style="background-color: #2ab27b; margin-left: 10px;"> Search
+                                <button type="submit" name="search"
+                                        style="background-color: #2ab27b; margin-left: 10px;"> Search
                                 </button>
                                 <a href="" style="text-decoration: none; margin-left: 10px;">
                                     <button type="button" name="back" style="background-color: black"> Back</button>

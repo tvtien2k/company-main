@@ -29,7 +29,8 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/management', 'AuthController@getHome')->name('management.get');
 
     //Ajax
-    Route::get('/ajax/company/{cpn_id}', 'AjaxController@getCompany')->name('ajax.company.get');;
+    Route::get('/ajax/company/{cpn_id}', 'AjaxController@getCompany')->name('ajax.company.get');
+    Route::get('/ajax/branch/{cpn_id}/{br_id}', 'AjaxController@getBranch')->name('ajax.branch.get');
 
     //Company ManagementRoute::group(['prefix'=>'/company'],function() {
     Route::get('/company', 'CompanyController@getCompany')->name('company.get');
@@ -61,8 +62,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/division_detail/{code}', 'DivisionController@getDvsDetail')->name('division_detail.get');
     Route::post('/division_detail/update', 'DivisionController@postUpdate')->name('division_detail.post');
 
-//Project Management
-
+    //Project Management
     Route::get('/project', 'ProjectController@getHome')->name('project.get');
     Route::get('/project/search', 'ProjectController@getSearch')->name('project_search.get');
 
