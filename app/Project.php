@@ -11,13 +11,13 @@ class Project extends Model
     protected $table = 'project';
     protected $primaryKey = 'pr_id';
 
-    public function devision()
+    public function division()
     {
         return $this->belongsTo('App\Division', 'dvs_id');
     }
 
     public function users()
     {
-        return $this->hasMany('App\User', 'pr_code', 'br_id');
+        return $this->hasMany('App\User', 'pr_id', 'br_id');
     }
 }

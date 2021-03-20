@@ -23,7 +23,7 @@ class Division extends Model
 
     public function users()
     {
-        return $this->hasMany('App\Profile', 'dvs_code', 'dvs_id');
+        return $this->hasMany('App\Profile', 'dvs_id', 'dvs_id');
     }
 
 }
