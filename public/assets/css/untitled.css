@@ -1,0 +1,123 @@
+.nav.nav-tabs {
+  width: 20%;
+  display: none;
+}
+#services li{
+width:100%;
+background-color:white;
+}
+#services li a{
+background-color:#EAF0F9;
+margin:7px;
+}
+#logo{
+width:20%;
+}
+#services li a:first-child{
+margin-top:0px;
+}
+#management{
+  display:flex;
+  flex-wrap:wrap;
+  width: 100%;
+}
+
+
+body{
+  font-family: sans-serif;
+}
+.left{
+  width:40%;
+  float:left;
+  height:100%;
+  margin-top:13%;
+
+
+
+}
+body{
+  overflow:hidden;
+}
+.btn{
+  width:300px;
+  float:right;
+
+}
+.avt{
+  position:relative;
+}
+#detail, #back{
+  width:100px;
+  height:35px;
+
+  margin-right:10px;
+  border:none;
+  color:white;
+  font-size:13px;
+  font-weight: 200;
+  border-radius:10px;
+}
+#detail{
+  background-color: #0058FF;
+}
+#back{
+  background-color: #000000;
+}
+.right{
+
+  width:40%;
+  float:right;
+  box-shadow: 5px 5px 18px #888888;
+
+}
+.avt img{
+  max-width:200px;
+  max-height:200px;
+  clip-path: circle(50%);
+  height: 50%;
+
+  display: block;
+  margin:0 auto
+}
+h3{
+  width: 300px ;
+  text-align: center;
+  font-size: 150%;
+  position:absolute;
+  left : 110px;
+}
+h2{
+  background-color:#72ACFF;
+  border-radius:5px;
+  margin: 0px;
+  padding:10px;
+  box-shadow: 5px 5px 18px #888888;
+}
+td{
+  padding:5px 30px;
+  height:30px;
+  font-size:20px;
+}
+tr:first-child td{
+  padding-top:20px;
+}
+tr td:first-child{
+  font-weight:600;
+}
+table{
+  margin-bottom: 100px;
+}
+.deptrai{
+  background-color: red!important;
+}
+.phuong{
+  width:85%;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Mar 11, 2021, 6:53:22 PM
+    Author     : Dell
+*/
+body{
+    margin:0;
+    font-family: sans-serif;
+}
+.container{
+
+}
+.header h1{
+    margin : 0;
+    text-align: center;
+    background-color: #E4E4E4;
+    border: 1px solid black;
+    font-weight: 100;
+    padding: 15px;
+}
+.main{
+    position: absolute;
+    left :40%;
+    margin-top: 50px;
+    font-weight: bold;
+}
+input{
+    width:300px;
+    height:25px;
+    border: 2px solid #99C3FF ;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+button{
+    width:40%;
+    height:30px;
+    border : none;
+    border-radius: 5px;
+    color: white;
+    margin-top: 30px;
+}
+#login{
+    padding: 12px 0px;
+}
+p{
+    font-size:12px;
+    margin: 0px;
+    padding-bottom: 5px;
+}
+.login{
+    float: left ;
+    background-color: #18c090;
+
+}
+.sign-up{
+    float:right;
+    background-color: #30c0f0;
+
+}
+.invalid-report{
+    color: red;
+    font-size: 8px;
+    display: none;
+}
+
+.signup{
+    text-align: center;
+    font-size: 25px;
+    margin-right: 50px;
+}
+h2{
+    margin-bottom: 10px;
+}

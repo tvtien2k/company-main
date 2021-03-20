@@ -1,0 +1,101 @@
+#all {
+    width: 100%;
+    font-family: Bahnschrift !important;
+    font-size: 16px !important;
+    color: black !important;
+}
+
+#first_body {
+    border-radius: 8px;
+    background-color: #72ACFF;
+    color: black;
+    width: 100%;
+    height: 50px;
+    font-family: Bahnschrift !important;
+    font-size: 30px !important;
+}
+
+#body_button {
+    height: 80px;
+    width: 360px;
+    align-content: end;
+    float: right;
+
+}
+
+button {
+    color: white;
+    padding: 10px 25px;
+    text-decoration-color: #9d9d9d;
+    border-radius: 6px;
+    align-content: end;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 250px;
+    height: 40px;
+    border: 2px solid #2a88bd;
+    border-radius: 6px;
+    margin-left: 2px;
+
+}
+
+.table_1, .table_1 td, .table_1 th {
+    border: 2px solid #9DB8E0;
+    border-collapse: collapse;
+    clear: both;
+    text-align: center;
+    color: black;
+}
+a{
+    margin-right: 10px;
+}
+
+table td{
+    padding-top: 5px;
+}
+
+select{
+    width: 250px;
+    height: 40px;
+    border: 2px solid #2a88bd;
+    border-radius: 6px;
+    margin-left: 2px;
+
+}
+select:required:invalid {
+    color: gray;
+}
+option[value=""][disabled] {
+    display: none;
+}
+option {
+    color: black;
+}
+
+#detail{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.goto{
+
+    background-color: #3b5998;
+    height: 35px;
+}
+
+.table_1 tr th{
+    background-color: #72ACFF;
+}
+
+.profile{
+    color: black;
+    height: 40px;
+    margin-top: 0px;
+}
+
+
+
+
