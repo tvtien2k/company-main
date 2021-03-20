@@ -45,7 +45,7 @@
                             Division Register
                         </div>
                         <br> <br>
-                        <form action="" method="post">
+                        <form action="{{route('division_register.post')}}" method="post">
                             {{ csrf_field() }}
                             <table style="width: 50%; float:left">
                                 <tr>
@@ -74,45 +74,45 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Project</td>
+                                    <td>Address</td>
                                     <td>
                                         <input style="width: 300px" type="text" placeholder="Please enter project Name"
-                                               name="project" required>
+                                               name="address" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>PM</td>
+                                    <td>Area</td>
                                     <td>
-                                        <select>
-                                            <option>Demo</option>
-                                        </select>
+                                        <input style="width: 300px" type="text" placeholder="Please enter project Name"
+                                               name="area" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td><input id="email" type="email" placeholder="Please enter Email" name="email"
-                                               required></td>
+                                    <td>
+                                        <input id="email" type="email" placeholder="Please enter Email" name="email"
+                                               required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Phone</td>
-                                    <td><input id="phone" type="text" placeholder="Please enter Phone Number"
-                                               name="phone" required></td>
+                                    <td>
+                                        <input id="phone" type="text" placeholder="Please enter Phone Number"
+                                               name="phone" required>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Website</td>
-                                    <td><input type="text" placeholder="Please enter Website" name="website" required>
+                                    <td>
+                                        <input type="text" placeholder="Please enter Website" name="website" required>
                                     </td>
                                 </tr>
                             </table>
-
                             <div id="image" style="width:30%;float:right;margin-bottom: 150px">
                                 <div style="height: 100px;width: 30px;display: inline-block;margin-bottom: 60px">Logo
                                 </div>
-                                <img src="" style="clip-path: circle(50%);display:inline-block;height:100px;">
                             </div>
-
                             <hr style="clear: both; margin-top: 300px">
-
                             <div id="body_button">
                                 <a style="text-decoration: none">
                                     <button type="submit" name="register" style="background-color: #30c0f0"> Register
@@ -125,7 +125,6 @@
                         </form>
                     </div>
                     <script>
-
                         function myFunction1() {
                             if (confirm("Do you want to update these company?")) {
                                 if (alert("Update Division Successfull!"))
@@ -134,9 +133,7 @@
                         }
                     </script>
                 </div>
-
             </div>
-
             <script src="assets/js/jquery.min.js"></script>
             <script src="assets/bootstrap/js/bootstrap.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>

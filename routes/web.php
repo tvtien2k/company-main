@@ -59,7 +59,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/division_register', 'DivisionController@getRegister')->name('division_register.get');
     Route::post('/division_register', 'DivisionController@postRegister')->name('division_register.post');
 
-    Route::get('/division_detail/{code}', 'DivisionController@getDvsDetail')->name('division_detail.get');
+    Route::get('/division_detail/{id}', 'DivisionController@getDvsDetail')->name('division_detail.get');
     Route::post('/division_detail/update', 'DivisionController@postUpdate')->name('division_detail.post');
 
     //Project Management

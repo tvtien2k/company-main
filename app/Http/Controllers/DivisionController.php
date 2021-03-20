@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Division;
+use App\User;
 use Illuminate\Http\Request;
 
 class DivisionController extends Controller
@@ -40,4 +41,36 @@ class DivisionController extends Controller
         return view('division_register');
     }
 
+    function postRegister(Request $request)
+    {
+        $division = new Division();
+        $division->br_id = $request->br_id;
+        $division->dvs_name = $request->name;
+        $division->dvs_address = $request->address;
+        $division->dvs_area = $request->area;
+        $division->dvs_email = $request->email;
+        $division->dvs_phone = $request->phone;
+        $division->dvs_website = $request->website;
+        $division->save();
+        return redirect('dashboard/division');
+    }
+
+    function getDvsDetail(Request $request)
+    {
+        $division = Division::find($request->id);
+        return view('division_detail', ['division' => $division]);
+    }
+
+    function postUpdate(Request $request)
+    {
+        $division = Division::find($request->id);
+        $division->dvs_address = $request->address;
+        $division->dvs_area = $request->area;
+        $division->dvs_email = $request->email;
+        $division->dvs_phone = $request->phone;
+        $division->dvs_website = $request->website;
+        $division->dvs_status = $request->status;
+        $division->save();
+        return redirect('dashboard/division');
+    }
 }

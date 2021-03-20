@@ -76,7 +76,8 @@
                             <div id="image" style="width:30%;float:right;margin-bottom: 150px">
                                 <div style="height: 100px;width: 30px;display: inline-block;margin-bottom: 60px">Logo
                                 </div>
-                                <img src="" style="clip-path: circle(50%);display:inline-block;height:100px;"/>
+                                <img src="{{asset('img/avatar5.jpeg')}}"
+                                     style="clip-path: circle(50%);display:inline-block;height:100px;">
                             </div>
                             <hr style="clear: both; margin-top: 300px">
                             <div id="body_button">
