@@ -29,73 +29,9 @@
 <div id="wrapper" 0="">
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content" style="background-color:white">
-            <nav class="navbar navbar-light navbar-expand topbar bg-white static-top" style="padding:0px">
-                <div class="container-fluid">
-
-                    <div type="button" id="exit" style="border: none;width: 15%;height: 70px"><h1 onclick="show()"
-                                                                                                  id="logo"
-                                                                                                  style="margin: 0px;height:70px;padding-left:1%;color:black;"
-                                                                                                  class="shadow animated--grow-in">
-                            Logo</h1></div>
-                    <ul class="nav navbar-nav flex-nowrap ml-auto">
-                        <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                            <div class="nav-item dropdown no-arrow show"><a class="dropdown-toggle nav-link"
-                                                                            data-toggle="dropdown" aria-expanded="true"
-                                                                            href="#" style="color:black">Home</a>
-
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       data-toggle="dropdown" aria-expanded="false"
-                                                                       href="#" style="color:black">About</a>
-
-                            </div>
-                            <div class="shadow dropdown-list dropdown-menu dropdown-menu-right"
-                                 aria-labelledby="alertsDropdown"></div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow" role="presentation">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       data-toggle="dropdown" aria-expanded="false"
-                                ><img
-                                            class="border rounded-circle img-profile"
-                                            src="{{asset('assets/img/avatars/avatar1.jpeg')}}"></a>
-                                <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                                    <a class="dropdown-item" role="presentation" href="{{route('profile.get')}}"><img
-                                                src="{{asset('assets/img/avatars/Capture5.PNG')}}"
-                                                style="width:23px;height:22px">&nbsp;Profile</a>
-                                    <a class="dropdown-item" role="presentation" href="{{route('login.get')}}"><img
-                                                src="{{asset('assets/img/avatars/Capture5.PNG')}}"
-                                                style="width:23px;height:22px">&nbsp;Log
-                                        out</a></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            @include('layouts.nav')
             <div id="management" style="margin-left: 1%">
-                <ul class="nav nav-tabs shadow animated--grow-in" id="services"
-                    style="display: none; background-color: white;">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="{{asset('assets/img/avatars/Capture5.PNG')}}"
-                                                          style="width:23px;height:22px">Home</a>
-                        <a class="nav-link" href="{{route('company.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture.PNG')}}"
-                                    style="width:23px;height:22px">Company</a>
-                        <a class="nav-link" href="{{route('branch.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture2.PNG')}}"
-                                    style="width:23px;height:22px">Branch</a>
-                        <a class="nav-link" href="{{route('devision.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture3.PNG')}}" style="width:23px;height:22px">Devision</a>
-                        <a class="nav-link" href="{{route('project.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture4.PNG')}}"
-                                    style="width:23px;height:22px">Project</a>
-                        <a class="nav-link" href="#"><img
-                                    src="{{asset('assets/img/avatars/Capture6.PNG')}}" style="width:25px;height:25px">Human
-                            Resources</a>
-                    </li>
-                    <li class="nav-item"></li>
-                </ul>
+                @include('layouts.menu')
 
                 <div id="phuong" class="phuong" style="width: 98%; margin-left: 0%">
                     <div id="all" style="width: 100%">
@@ -126,47 +62,87 @@
                                     <table style="width: 50%; float:left">
                                         <tr>
                                             <td>Branch</td>
-                                            <td><input type="text" style="color: gray;width: 30%" name="br_id" value="" readonly>
-                                                <input type="text" name="br_name" style="width: 65%" value="" readonly>
+                                            <td><input type="text" style="color: gray;width: 30%"
+                                                       name="br_id"
+                                                       @if (Auth::user()->division !=null)
+                                                       value="{{Auth::user()->division->branch->br_id}}"
+                                                       readonly
+                                                       @else
+                                                               placeholder="Please enter Branch"
+                                                                required
+                                                       @endif
+                                                       >
+                                                <input type="text" name="br_name" style="width: 65%"
+                                                       @if (Auth::user()->division !=null)
+                                                       value="{{Auth::user()->division->branch->br_name}}"
+                                                       readonly
+                                                       @else
+                                                               placeholder="Please enter Name Branch"
+                                                                required
+                                                        @endif>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>Division</td>
-                                            <td><input type="text" style="width: 30%;color: gray" name="dvs_id" value="" readonly>
-                                                <input type="text" name="dvs_name" style="width: 65%" value="" readonly>
+                                            <td><input type="text" style="width: 30%;color: gray" name="dvs_id"
+                                                       @if (Auth::user()->division !=null)
+                                                       value="{{Auth::user()->division->dvs_id}}"
+                                                       readonly
+                                                        @else
+                                                            placeholder="Please enter Division"
+                                                            required
+                                                @endif>
+                                                <input type="text" name="dvs_name" style="width: 65%"
+                                                       @if (Auth::user()->division !=null)
+                                                       value="{{Auth::user()->division->dvs_name}}"
+                                                       readonly
+                                                       @else
+                                                       placeholder="Please enter Name Division"
+                                                       required
+                                                        @endif>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Employee</td>
                                             <td>
-                                                <input type="text" style="width: 30%;color: gray" name="user_id" value="" readonly>
-                                                <input type="text" name="user_name" style="width: 65%" value="" readonly>
+                                                <input type="text" style="width: 30%;color: gray" name="id"
+                                                       value="{{Auth::user()->id}}"
+                                                       readonly>
+                                                <input type="text" name="name" style="width: 65%"
+                                                       value="{{Auth::user()->name}}"
+                                                       readonly>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Phone number</td>
                                             <td>
-                                                <input style="width: 300px" type="text" name="phone" value="" required>
+                                                <input style="width: 300px" type="text" name="phone"
+                                                       value="{{Auth::user()->phone}}"
+                                                       required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Email</td>
                                             <td>
-                                                <input style="width: 300px" type="email" name="email" value="" required>
+                                                <input style="width: 300px" type="email" name="email"
+                                                       value="{{Auth::user()->email}}"
+                                                       required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Address</td>
                                             <td>
-                                                <input id="email" type="text" placeholder="" name="address" value="" required>
+                                                <input id="email" type="text" placeholder="" name="address"
+                                                       value="{{Auth::user()->address}}"
+                                                       required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Join Date</td>
                                             <td>
                                                 <input id="phone" type="date" name="join_date"
-                                                       value=""
+                                                       value="{{Auth::user()->join_date}}"
                                                        required>
                                             </td>
                                         </tr>
@@ -174,6 +150,7 @@
                                             <td>Experience</td>
                                             <td >
                                                 <select name="experience" style="margin-left: 0px">
+                                                    <option selected hidden>{{Auth::user()->experience}}</option>
                                                     <option value="Demo">Demo</option>
                                                 </select>
                                             </td>
@@ -182,6 +159,7 @@
                                             <td>Type of Contract</td>
                                             <td style="margin-left: 2px">
                                                 <select name="contract" style="margin-left: 0px">
+                                                    <option selected hidden>{{Auth::user()->contract}}</option>
                                                     <option value="Demo">Demo</option>
                                                 </select>
                                             </td>
@@ -200,7 +178,7 @@
                                             <td>Date of Birth</td>
                                             <td>
                                                 <input style="width: 300px" type="date" name="birthday"
-                                                       value=""
+                                                       value="{{ Auth::user()->birthday}}"
                                                        required>
                                             </td>
                                         </tr>
@@ -208,7 +186,7 @@
                                             <td>Work Email</td>
                                             <td>
                                                 <input style="width: 300px" type="email" name="work_email"
-                                                       value=""
+                                                       value="{{ Auth::user()->email_work}}"
                                                        required>
                                             </td>
                                         </tr>
@@ -216,7 +194,7 @@
                                             <td>ID/Passport No</td>
                                             <td>
                                                 <input id="email" type="text" placeholder="" name="passport"
-                                                       value=""
+                                                       value="{{ Auth::user()->passport}}"
                                                        required>
                                             </td>
                                         </tr>
@@ -224,7 +202,7 @@
                                             <td>ID/Passport Date</td>
                                             <td>
                                                 <input id="phone" type="date" name="date_passport"
-                                                       value="{{Auth::user()->profile->date_passport}}"
+                                                       value="{{Auth::user()->date_passport}}"
                                                        required>
                                             </td>
                                         </tr>

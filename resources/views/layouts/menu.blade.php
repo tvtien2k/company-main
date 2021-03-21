@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs shadow animated--grow-in" id="services"
     style="display: none; background-color: white;">
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('management.get')}}">
             <img src="{{asset('assets/img/avatars/Capture5.PNG')}}" style="width:23px;height:22px">
             Home
         </a>
@@ -21,7 +21,7 @@
             <img src="{{asset('assets/img/avatars/Capture4.PNG')}}" style="width:23px;height:22px">
             Project
         </a>
-        <a class="nav-link" href="{{route('profile.get')}}">
+        <a class="nav-link" href="">
             <img src="{{asset('assets/img/avatars/Capture6.PNG')}}" style="width:25px;height:25px">
             Human Resources
         </a>

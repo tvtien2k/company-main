@@ -76,7 +76,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
 
 //Profile Management
 
-    Route::get('/profile', 'ProfileController@getProcess')->name('profile.get');
+    Route::get('/profile', 'ProfileController@getHome')->name('profile.get');
     Route::get('/profile_information/', 'ProfileController@getInformation')->name('information.get');
     Route::post('/profile_information/', 'ProfileController@postInformation')->name('information.post');
 

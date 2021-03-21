@@ -11,7 +11,7 @@ class Project extends Model
     protected $table = 'project';
     protected $primaryKey = 'pr_id';
 
-    public function devision()
+    public function division()
     {
         return $this->belongsTo('App\Division', 'dvs_id');
     }

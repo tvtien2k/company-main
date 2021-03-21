@@ -34,12 +34,12 @@
                              src="{{asset('assets/img/avatars/avatar1.jpeg')}}">
                     </a>
                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                        <a class="dropdown-item" role="presentation" href="">
+                        <a class="dropdown-item" role="presentation" href="{{route('profile.get')}}">
                             <img src="{{asset('assets/img/avatars/Capture5.PNG')}}"
                                  style="width:23px;height:22px">&nbsp
                             Profile
                         </a>
-                        <a class="dropdown-item" role="presentation" href="">
+                        <a class="dropdown-item" role="presentation" href="{{route('login')}}">
                             <img src="{{asset('assets/img/avatars/Capture5.PNG')}}"
                                  style="width:23px;height:22px">&nbsp;Log
                             out
