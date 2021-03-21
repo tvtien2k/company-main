@@ -71,10 +71,14 @@
                                     <td>Division</td>
                                     <td>
                                         <select name="division" required id="dvs_id" onchange="getPM()">
-                                            <option hidden>Select Division</option>
-                                            @foreach($divisions as $division)
-                                                <option value="{{$division->dvs_id}}">{{$division->dvs_name}}</option>
-                                            @endforeach
+                                            @if(old('division'))
+                                                <option value="{{old('division')}}" selected>Selected</option>
+                                            @else
+                                                <option hidden>Select Division</option>
+                                                @foreach($divisions as $division)
+                                                    <option value="{{$division->dvs_id}}">{{$division->dvs_name}}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </td>
                                 </tr>
@@ -89,13 +93,16 @@
                                     <td>PM</td>
                                     <td>
                                         <select id="pm_id" name="pm_id" onchange="getMember();" required>
+                                            @if(old('pm_id'))
+                                                <option value="{{old('pm_id')}}" selected>Selected</option>
+                                            @endif
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Start Date</td>
                                     <td>
-                                        <input type="date" placeholder="Please enter Start Date" name="start_date">
+                                        <input type="date" value="{{old('date')}}" name="start_date">
                                     </td>
                                 </tr>
                                 <tr>
@@ -111,24 +118,28 @@
                                                 <th> Role</th>
                                                 <th></th>
                                             </tr>
-                                            <div id="member-infor">
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-                                                        <a href="#">
-                                                            <button type="submit" name="teamMember"
-                                                                    style="background-color: #c8441c">
-                                                                Delete
-                                                            </button>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </div>
+                                            @if(!empty($members))
+                                                @php
+                                                    $i = 1;
+                                                @endphp
+                                                @foreach($members as $member)
+                                                    <tr>
+                                                        <td>{{$i++}}</td>
+                                                        <td>{{$member->user->id}}</td>
+                                                        <td>{{$member->user->name}}</td>
+                                                        <td>{{$member->user->email}}</td>
+                                                        <td>{{$member->user->phone}}</td>
+                                                        <td>{{$member->role}}</td>
+                                                        <td>
+                                                            <a href="dashboard/member-project/delete/{{$member->user->id}}">
+                                                                <button type="button" style="background-color: #c83e1c">
+                                                                    Delete
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             <tr>
                                                 <td></td>
                                                 <td></td>
@@ -148,8 +159,8 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button type="button" style="background-color: #1cc88a"
-                                                            onclick="addMember()">
+                                                    <button type="submit" style="background-color: #1cc88a"
+                                                            name="action" value="teamMember">
                                                         Add
                                                     </button>
                                                 </td>
@@ -160,20 +171,22 @@
                                 <tr>
                                     <td>Manage tool</td>
                                     <td>
-                                        <input type="text" name="tool" placeholder="Please enter Tool">
+                                        <input type="text" name="tool" value="{{old('tool')}}"
+                                               placeholder="Please enter Tool">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Documentation</td>
                                     <td>
                                         <input type="text" placeholder="Please enter documentation"
-                                               name="documentation">
+                                               name="documentation" value="{{old('documentation')}}">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Description</td>
                                     <td>
-                                        <input name="description" placeholder="Please enter description">
+                                        <input name="description" placeholder="Please enter description"
+                                               value="{{old('description')}}">
                                     </td>
                                 </tr>
                             </table>
@@ -227,19 +240,9 @@
         });
     }
 
-    function addMember() {
-        var dvs_id = $("#dvs_id").val();
-        var pm_id = $("#pm_id").val();
-        var mb_id = $("#member_id").val();
-        var role = $("#role").val();
-        $.ajax({
-            type: "get",
-            url: "dashboard/ajax/add-member/" + dvs_id + "/" + pm_id + "/" + mb_id + "/" + role,
-            success: function (res) {
-                $("#member-infor").html(res);
-            }
-        });
-    }
+    $(document).ready(function () {
+        getMember();
+    });
 </script>
 </body>
 </html>

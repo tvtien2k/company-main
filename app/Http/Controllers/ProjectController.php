@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Division;
 use App\Project;
+use App\ProjectMember;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,27 +42,40 @@ class ProjectController extends Controller
     function getRegister()
     {
         $division = Division::where('br_id', Auth::user()->division->branch->br_id)->get();
-        $users = User::where('dvs_code', Auth::user()->division->dvs_id)->get();
-        return view('project_register', ['divisions' => $division, 'users' => $users]);
+        $members = ProjectMember::where('pr_id', null)->get();
+        return view('project_register', ['divisions' => $division, 'members' => $members]);
     }
 
     function postRegister(Request $request)
     {
         switch ($request->input('action')) {
             case 'teamMember':
-                $member = User::find($request->member_id);
-                if (!session('members')) {
-                    session(['members' => [$member]]);
-                } else {
-                    $arr = session('members');
-                    array_push($arr, $member);
-                    session(['members' => $arr]);
+                if (count(ProjectMember::where([['pr_id', null], ['user_id', $request->member_id]])->get()) == 0) {
+                    $member = new ProjectMember();
+                    $member->user_id = $request->member_id;
+                    $member->role = $request->role;
+                    $member->save();
                 }
                 return back()->withInput();
-
             case 'project':
-                // Preview model
-                break;
+                $project = new Project();
+                $project->pr_name = $request->name;
+                $project->dvs_id = $request->division;
+                $project->pr_pm = $request->pm_id;
+                $project->pr_date = $request->start_date;
+                $project->pr_tool = $request->tool;
+                $project->pr_documentation = $request->documentation;
+                $project->pr_description = $request->description;
+                $project->save();
+                $members = ProjectMember::where('pr_id', null)->update(['pr_id'=>$project->pr_id]);
+                return redirect('dashboard/project');
         }
+    }
+
+    function getDeleteMember1(Request $request)
+    {
+        $member = ProjectMember::where([['pr_id', null], ['user_id', $request->id]])->first();
+        $member->delete();
+        return back()->withInput();
     }
 }

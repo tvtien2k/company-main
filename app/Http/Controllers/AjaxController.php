@@ -38,15 +38,4 @@ class AjaxController extends Controller
             echo "<option value=" . $mb->id . ">" . $mb->name . "</option>";
         }
     }
-
-    function addMember(Request $request)
-    {
-        $member = new ProjectMember();
-        $member->user_id = $request->mb_id;
-        $member->role = $request->role;
-        $member->save();
-        $members = User::where([['dvs_code', $request->dvs_id], ['id', '!=', $request->pm_id]])->get();
-        $str = "";
-
-    }
 }

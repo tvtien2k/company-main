@@ -20,8 +20,8 @@ class CreateProjectTable extends Migration
             $table->integer('dvs_id');
             $table->integer('pr_pm');
             $table->date('pr_date');
-            $table->string('pr_status');
-            $table->string('pr_quality');
+            $table->string('pr_status')->nullable();
+            $table->string('pr_quality')->nullable();
             $table->string('pr_tool');
             $table->string('pr_documentation');
             $table->string('pr_description');

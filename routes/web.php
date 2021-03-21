@@ -33,7 +33,6 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/ajax/branch/{cpn_id}/{br_id}', 'AjaxController@getBranch')->name('ajax.branch.get');
     Route::get('/ajax/pm/{dvs_id}', 'AjaxController@getPM')->name('AjaxGetPM.get');
     Route::get('/ajax/member/{dvs_id}/{pm_id}', 'AjaxController@getMember');
-    Route::get('/ajax/add-member/{dvs_id}/{pm_id}/{mb_id}/{role}', 'AjaxController@addMember');
 
     //Company ManagementRoute::group(['prefix'=>'/company'],function() {
     Route::get('/company', 'CompanyController@getCompany')->name('company.get');
@@ -70,6 +69,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/project/search', 'ProjectController@getSearch')->name('project_search.get');
 
     Route::get('/project_register', 'ProjectController@getRegister')->name('project_register.get');
+    Route::get('/member-project/delete/{id}', 'ProjectController@getDeleteMember1');
     Route::post('/project_register', 'ProjectController@postRegister')->name('project_register.post');
 
     Route::get('/project_detail/{code}', 'ProjectController@getDetail')->name('project_detail.get');
