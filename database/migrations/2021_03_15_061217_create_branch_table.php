@@ -22,7 +22,7 @@ class CreateBranchTable extends Migration
             $table->string('br_address');
             $table->string('br_area');
             $table->string('br_phone');
-            $table->string('br_status');
+            $table->string('br_status')->nullable();
             $table->string('br_website');
             $table->timestamps();
         });

@@ -26,7 +26,7 @@ class AuthController extends Controller
             return back()->withInput();
         }
         $user = new User();
-        $user->name = $request->name . $request->lastname;
+        $user->name = $request->name . ' ' . $request->lastname;
         $user->email = $request->email;
         $user->phone = $request->phonenummber;
         $user->password = Hash::make($request->password);
