@@ -10,6 +10,11 @@
     <link href="{{asset('assets/bootstrap/js/fonts/fontawesome-all.min.css')}}" rel="stylesheet" type="text/css"/>
     @include('layouts.scrip')
     <link href={{ asset('css/company.css') }} rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <base href="{{asset('')}}">
+
     <script>
         function show() {
             var x = document.getElementById("services");
@@ -21,7 +26,15 @@
                 document.getElementById("logo").removeAttribute("class");
             }
         }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
+
+
 </head>
 <body id="page-top">
 <div id="wrapper" 0="">
@@ -91,7 +104,7 @@
                             </div>
                         </form>
                         <div>
-                            <table style="; width: 100%" class="table_1">
+                            <table style="margin-bottom: 15px; width: 100%" class="table_1">
                                 <tr style="background-color: #72ACFF">
                                     <th>Code</th>
                                     <th>Company Name</th>
@@ -118,6 +131,21 @@
                                     </tr>
                                 @endforeach
                             </table>
+                        <div>
+{{--                            <div style="float: left">--}}
+{{--                            <span>--}}
+{{--                                Number of record--}}
+{{--                            </span>--}}
+
+{{--                                    <select id="number" name="number" onchange="getRow()" style="width: 50px">--}}
+{{--                                        @for ($i=1;$i<=10;$i++)--}}
+{{--                                        <option value="{{$i*5}}"> {{$i*5}}</option>--}}
+{{--                                        @endfor--}}
+{{--                                    </select>--}}
+
+{{--                            </div>--}}
+                            <div style="float :right"><div style="font-size: 24px"> @include('layouts.pagination', ['paginator' => $companies, 'interval' => 1]) </div></div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -130,6 +158,18 @@
     </div>
 </div>
 <script language="javascript">
+
+    function getRow() {
+        var row = $("#number").val();
+        $.ajax({
+            type: "get",
+            url: 'dashboard/ajax/member/' + row,
+            success: function (res) {
+                $("#cpn_name").html(res);
+            }
+        });
+    }
+
     document.getElementById("exit").onclick = function () {
         document.getElementById("phuong").style.display = 'none';
     };

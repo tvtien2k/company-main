@@ -43,7 +43,7 @@
                             Profile
                         </div>
                     </div>
-                    <div >
+                    <div>
                         @include('layouts.profile')
                         <div style="width: 90%;margin-left: 5%; border-style: ridge; border-top-style: none">
                             <table style="margin-top: 20px;width: 100%;" class="table_1">
@@ -55,7 +55,9 @@
                                     <th>Note experience</th>
                                     <th>Level</th>
                                 </tr>
-                                @foreach( $skills as $skill)
+
+                                @if (!empty($skills))
+                                    @foreach( $skills as $skill)
                                         <tr>
                                             <td>{{$skill->sk_type}}</td>
                                             <td>{{$skill->sk_name}}</td>
@@ -64,19 +66,23 @@
                                             <td>{{$skill->sk_note_experiences}}</td>
                                             <td>{{$skill->sk_level}}</td>
                                         </tr>
-                                @endforeach
-
+                                    @endforeach
+                                @endif
                             </table>
 
                             <div style="width: 96%;margin-left: 5%;margin-top: 30px">
-                                Last update :{{$skill->updated_at}}
+                                Last update :{{$skill->updated_at ?? " "}}
                             </div>
                             <div id="body_button" style="width: 300px;">
-                                <a href="{{route('skill_update.get')}}" ><button type="submit" name="register" style="background-color: #2ab27b">
+                                <a href="{{route('skill_update.get')}}">
+                                    <button type="submit" name="register" style="background-color: #2ab27b">
                                         Update
-                                    </button></a>
+                                    </button>
+                                </a>
                                 <a href="{{route('profile.get')}}">
-                                    <button type="button" name="back" style=" color: white; background-color: #000000"> Back</button>
+                                    <button type="button" name="back" style=" color: white; background-color: #000000">
+                                        Back
+                                    </button>
                                 </a>
                             </div>
 

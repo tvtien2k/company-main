@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Branch;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class BranchController extends Controller
 {
     function getHome()
     {
-        $branches = Branch::orderBy('br_name')->paginate(10);
+        $branches = Branch::orderBy('br_name')->paginate(5);
         return view('branch', ['branches' => $branches]);
     }
 

@@ -75,7 +75,7 @@
                                 @endforeach
                             </table>
                             <div style="width: 96%;margin-left: 5%;margin-top: 30px">
-                                Last update :{{$cer->updated_at}}
+                                Last update :{{$cer->updated_at ?? " "}}
                             </div>
                         </div>
                         <div id="body_button" style="width: 300px;">

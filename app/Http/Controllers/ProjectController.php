@@ -91,7 +91,7 @@ class ProjectController extends Controller
     {
         $member = ProjectMember::where([['pr_id', $request->pr_id], ['user_id', $request->mb_id]])->first();
         $member->delete();
-        return back();
+        return back()->withInput();
     }
 
     function postUpdate(Request $request)

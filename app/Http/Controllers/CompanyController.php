@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    function getCompany()
+    function getCompany(Request $request)
     {
-        $companies = Company::orderBy('cpn_name')->get();
+
+        $companies = Company::orderBy('cpn_name')->paginate($request->row ?? 5);
+//        dd($companies->links());
         return view('company', ['companies' => $companies]);
     }
 

@@ -151,6 +151,7 @@
 
                             </table>
                         </div>
+                        <div style="font-size: 20px"> {{ $projects->links() }}</div>
                     </div>
                 </div>
             </div>

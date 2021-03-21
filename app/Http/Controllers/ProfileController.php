@@ -4,7 +4,6 @@
 namespace App\Http\Controllers;
 
 
-
 use App\Certificate;
 use App\Skill;
 use App\User;
@@ -29,7 +28,7 @@ class ProfileController extends Model
     {
         $profile = User::where('id', Auth::id())->first();
         var_dump($profile);
-        $profile->dvs_id = $request->dvs_id;
+        $profile->dvs_code = $request->dvs_id;
         $profile->phone = $request->phone;
         $profile->email = $request->email;
         $profile->address = $request->address;
@@ -46,17 +45,16 @@ class ProfileController extends Model
 
     function getSkill(Request $request)
     {
-        $skills = Skill::where('user_id' , Auth::id()) ->get();
-        return view('profile_skill', ['skills'=>$skills]);
-
+        $skills = Skill::where('user_id', Auth::id())->get();
+        return view('profile_skill', ['skills' => $skills]);
     }
 
 
     function getSkillUpdate(Request $request)
     {
-        $skills = Skill::where('user_id' , Auth::id()) ->get();
+        $skills = Skill::where('user_id', Auth::id())->get();
 
-        return view('profile_skillupd',['skills'=>$skills]);
+        return view('profile_skillupd', ['skills' => $skills]);
     }
 
     function postSkill(Request $request)
@@ -73,26 +71,26 @@ class ProfileController extends Model
         return redirect()->route('skill_update.get');
     }
 
-    function postDelete(Request  $request)
+    function postDelete(Request $request)
     {
-        $skills = Skill::where('sk_name' , $request->name );
+        $skills = Skill::where('sk_name', $request->name);
         $skills->delete();
         return redirect()->route('skill_update.get');
     }
 
-  //Certificate
+    //Certificate
 
 
     function getCertificate()
     {
         $cers = Certificate::where('user_id', Auth::id())->get();
-        return view('profile_certificate',['cers'=>$cers]);
+        return view('profile_certificate', ['cers' => $cers]);
     }
 
     function getCertificateUpdate(Request $request)
     {
         $cers = Certificate::where('user_id', Auth::id())->get();
-        return view('profile_cerupdate',['cers'=>$cers]);
+        return view('profile_cerupdate', ['cers' => $cers]);
     }
 
     function postAdd(Request $request)
@@ -107,7 +105,8 @@ class ProfileController extends Model
         return redirect()->route('certificate_update.get');
     }
 
-    function getDelete_Cer(Request $request){
+    function getDelete_Cer(Request $request)
+    {
         $cer = Certificate::where('certificate', $request->certificate);
         $cer->delete();
         return redirect()->route('certificate_update.get');

@@ -33,6 +33,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/ajax/branch/{cpn_id}/{br_id}', 'AjaxController@getBranch')->name('ajax.branch.get');
     Route::get('/ajax/pm/{dvs_id}', 'AjaxController@getPM')->name('AjaxGetPM.get');
     Route::get('/ajax/member/{dvs_id}/{pm_id}', 'AjaxController@getMember');
+    Route::get('/ajax/member/{row}', 'CompanyController@getCompany');
 
     //Company ManagementRoute::group(['prefix'=>'/company'],function() {
     Route::get('/company', 'CompanyController@getCompany')->name('company.get');

@@ -20,7 +20,7 @@ class CompanyTableSeeder extends Seeder
                 'cpn_name' => $faker->name,
                 'cpn_email' => $faker->email,
                 'cpn_phone' => $faker->phoneNumber,
-                'cpn_status' =>" ",
+                'cpn_status' =>"Stop",
                 'cpn_address' => $faker->address,
                 'cpn_website' => $faker->safeEmailDomain,
             ]);
