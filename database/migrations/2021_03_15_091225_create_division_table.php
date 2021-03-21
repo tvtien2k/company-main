@@ -22,7 +22,7 @@ class CreateDivisionTable extends Migration
             $table->string('dvs_address');
             $table->string('dvs_area');
             $table->string('dvs_phone');
-            $table->string('dvs_status');
+            $table->string('dvs_status')->nullable();
             $table->string('dvs_website');
             $table->timestamps();
         });

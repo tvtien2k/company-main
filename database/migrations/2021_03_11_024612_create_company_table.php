@@ -21,7 +21,7 @@ class CreateCompanyTable extends Migration
             $table->string('cpn_name');
             $table->string('cpn_email');
             $table->string('cpn_phone');
-            $table->string('cpn_status');
+            $table->string('cpn_status')->nullable();
             $table->string('cpn_address');
             $table->string('cpn_website');
             $table->timestamps();

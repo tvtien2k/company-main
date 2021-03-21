@@ -35,66 +35,69 @@
                             Project Management
                         </div>
                         <br> <br>
-                        <form action="" method="get">
+                        <form action="{{route('project_search.get')}}" method="get">
                             <table style=" width: 50%; float: left">
                                 <tr>
                                     <td>Company</td>
-                                    <td><input id="company" style="width: 100px" type="text" placeholder="Company code"
+                                    <td>
+                                        <input id="company" style="width: 100px" type="text" placeholder="Company code"
                                                name="cpn_id" disabled>
                                         <input type="text" placeholder="Please enter Company name" name="cpn_name"
-                                               disabled></td>
-                                </tr>
-
-                                <tr>
-                                    <td>Project</td>
-                                    <td><input style="width: 100px" type="text" placeholder="Project code" name="id"
                                                disabled>
-                                        <input type="text" placeholder="Please enter Project name" name="name"></td>
-                                </tr>
-                                <tr>
-                                    <td>Start Dtae</td>
-                                    <td><input id="date" type="text" placeholder="____-__-__" name="email" disabled>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <td>Project</td>
+                                    <td>
+                                        <input style="width: 100px" type="text" placeholder="Project code" name="id">
+                                        <input type="text" placeholder="Please enter Project name" name="name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td>
+                                        <input id="date" type="date" placeholder="____-__-__" name="date">
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>Status</td>
-                                    <td><select name="status">
+                                    <td>
+                                        <select name="status">
                                             <option selected disabled>Select status</option>
-                                            <option value="working">Go Live</option>
-                                            <option value="maintain">Maintain</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="stop">Stop</option>
+                                            <option value="Working">Go Live</option>
+                                            <option value="Maintain">Maintain</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Stop">Stop</option>
                                         </select>
                                     </td>
                                 </tr>
                             </table>
-
                             <table style=" width: 50%; float:right;margin-bottom: 120px">
                                 <tr>
                                     <td>Branch (Option)</td>
-                                    <td><input id="company" style="width: 100px" type="text" placeholder="Branch code"
+                                    <td>
+                                        <input id="company" style="width: 100px" type="text" placeholder="Branch code"
                                                name="br_id" disabled>
                                         <input type="text" placeholder="Please enter Branch name" name="br_name"
-                                               disabled></td>
+                                               disabled>
+                                    </td>
                                 </tr>
-
                                 <tr>
                                     <td>Division</td>
-                                    <td><input style="width: 100px" type="text" placeholder="Division code"
+                                    <td>
+                                        <input style="width: 100px" type="text" placeholder="Division code"
                                                name="dvs_id" disabled>
                                         <input type="text" placeholder="Please enter Division name" name="dvs_name"
-                                               disabled></td>
+                                               disabled>
+                                    </td>
                                 </tr>
-
                                 <tr>
                                     <td>Quality</td>
-                                    <td><input id="date" type="text" placeholder="Please enter Quality" name="email"
-                                               disabled></td>
+                                    <td>
+                                        <input id="date" type="text" placeholder="Please enter Quality" name="quality">
+                                    </td>
                                 </tr>
-
                             </table>
-
                             <hr style="margin-top: 40px; clear:both;">
                             <div id="body_button">
                                 <a href="" style="text-decoration: none;    margin-left: 10px;">
@@ -109,7 +112,6 @@
                                 </a>
                             </div>
                         </form>
-
                         <div>
                             <table style="; width: 100%" class="table_1">
                                 <tr style="background-color: #30c0f0">
@@ -128,9 +130,9 @@
                                         <td>{{$project->pr_id}}</td>
                                         <td>{{$project->pr_name}}</td>
                                         <td>{{$project->pm->name ?? ''}}</td>
-                                        <td>0</td>
+                                        <td>{{count($project->members)}}</td>
                                         <td>{{$project->pr_date}}</td>
-                                        <td>{{$project->devision->dvs_name}}</td>
+                                        <td>{{$project->division->dvs_name ?? ''}}</td>
                                         <td>{{$project->pr_quality}}</td>
                                         <td>{{$project->pr_status}}</td>
                                         <td style="text-align: center">
