@@ -10,6 +10,8 @@
     <link href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/untitled.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/bootstrap/js/fonts/fontawesome-all.min.css')}}" rel="stylesheet" type="text/css"/>
+    @include('layouts.scrip')
+
     <link href={{ asset('css/company.css') }} rel="stylesheet">
     <script>
         function show() {
