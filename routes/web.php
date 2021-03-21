@@ -72,7 +72,8 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/member-project/delete/{id}', 'ProjectController@getDeleteMember1');
     Route::post('/project_register', 'ProjectController@postRegister')->name('project_register.post');
 
-    Route::get('/project_detail/{code}', 'ProjectController@getDetail')->name('project_detail.get');
+    Route::get('/project_detail/{id}', 'ProjectController@getDetail')->name('project_detail.get');
+    Route::get('/member-project/delete/{pr_id}/{mb_id}', 'ProjectController@getDeleteMember2');
     Route::post('/project_detail/update', 'ProjectController@postUpdate')->name('project_detail.post');
 
 
@@ -84,13 +85,13 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
 
     Route::get('/profile_skill', 'ProfileController@getSkill')->name('skill.get');
     Route::get('/profile_skill/update', 'ProfileController@getSkillUpdate')->name('skill_update.get');
-    Route::post('/skill/add','ProfileController@postSkill')->name('post_skill');
-    Route::get('/skill/delete','ProfileController@postDelete')->name('post_skill.post');
+    Route::post('/skill/add', 'ProfileController@postSkill')->name('post_skill');
+    Route::get('/skill/delete', 'ProfileController@postDelete')->name('post_skill.post');
 
 
     Route::get('/profile_certificate', 'ProfileController@getCertificate')->name('certificate.get');
     Route::get('/profile_certificate/update', 'ProfileController@getCertificateUpdate')->name('certificate_update.get');
-    Route::post('/certificate/add','ProfileController@postAdd')->name('add.post');
-    Route::get('/certificate/delete','ProfileController@getDelete_Cer')->name('delete.get');
+    Route::post('/certificate/add', 'ProfileController@postAdd')->name('add.post');
+    Route::get('/certificate/delete', 'ProfileController@getDelete_Cer')->name('delete.get');
 
 });

@@ -67,7 +67,7 @@ class ProjectController extends Controller
                 $project->pr_documentation = $request->documentation;
                 $project->pr_description = $request->description;
                 $project->save();
-                $members = ProjectMember::where('pr_id', null)->update(['pr_id'=>$project->pr_id]);
+                $members = ProjectMember::where('pr_id', null)->update(['pr_id' => $project->pr_id]);
                 return redirect('dashboard/project');
         }
     }
@@ -77,5 +77,45 @@ class ProjectController extends Controller
         $member = ProjectMember::where([['pr_id', null], ['user_id', $request->id]])->first();
         $member->delete();
         return back()->withInput();
+    }
+
+    function getDetail(Request $request)
+    {
+        $project = Project::find($request->id);
+        $members = ProjectMember::where('pr_id', $request->id)->get();
+        $members_select = User::where([['dvs_code', $project->dvs_id], ['id', '!=', $project->pr_pm]])->get();
+        return view('project_detail', ['project' => $project, 'members' => $members, 'members_select' => $members_select]);
+    }
+
+    function getDeleteMember2(Request $request)
+    {
+        $member = ProjectMember::where([['pr_id', $request->pr_id], ['user_id', $request->mb_id]])->first();
+        $member->delete();
+        return back();
+    }
+
+    function postUpdate(Request $request)
+    {
+        switch ($request->input('action')) {
+            case 'teamMember':
+                if (count(ProjectMember::where([['pr_id', $request->pr_id], ['user_id', $request->member_id]])->get()) == 0) {
+                    $member = new ProjectMember();
+                    $member->pr_id = $request->pr_id;
+                    $member->user_id = $request->member_id;
+                    $member->role = $request->role;
+                    $member->save();
+                }
+                return back()->withInput();
+            case 'project':
+                $project = Project::find($request->pr_id);
+                $project->pr_name = $request->name;
+                $project->pr_date = $request->start_date;
+                $project->pr_tool = $request->tool;
+                $project->pr_documentation = $request->documentation;
+                $project->pr_description = $request->description;
+                $project->pr_status = $request->status;
+                $project->save();
+                return redirect('dashboard/project');
+        }
     }
 }
