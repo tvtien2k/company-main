@@ -21,7 +21,7 @@ class CreateSkillTable extends Migration
             $table->string('sk_note');
             $table->string('sk_experiences');
             $table->string('sk_note_experiences');
-            $table->string('sk_level');
+            $table->string('sk_level')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,9 @@
 namespace App\Http\Controllers;
 
 
-use App\Profile;
+
+use App\Certificate;
+use App\Skill;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
@@ -44,23 +46,72 @@ class ProfileController extends Model
 
     function getSkill(Request $request)
     {
-        return view('profile_skill');
+        $skills = Skill::where('user_id' , Auth::id()) ->get();
+        return view('profile_skill', ['skills'=>$skills]);
 
     }
 
-    function getCertificate(Request $request)
-    {
-        return view('profile_certificate');
-    }
 
     function getSkillUpdate(Request $request)
     {
-        return view('profile_skillupd');
+        $skills = Skill::where('user_id' , Auth::id()) ->get();
+
+        return view('profile_skillupd',['skills'=>$skills]);
+    }
+
+    function postSkill(Request $request)
+    {
+        $skill = new Skill();
+        $skill->user_id = Auth::id();
+        $skill->sk_type = $request->type;
+        $skill->sk_name = $request->name;
+        $skill->sk_note = $request->note;
+        $skill->sk_experiences = $request->experience;
+        $skill->sk_note_experiences = $request->note_experience;
+        $skill->sk_level = "Level 3";
+        $skill->save();
+        return redirect()->route('skill_update.get');
+    }
+
+    function postDelete(Request  $request)
+    {
+        $skills = Skill::where('sk_name' , $request->name );
+        $skills->delete();
+        return redirect()->route('skill_update.get');
+    }
+
+  //Certificate
+
+
+    function getCertificate()
+    {
+        $cers = Certificate::where('user_id', Auth::id())->get();
+        return view('profile_certificate',['cers'=>$cers]);
     }
 
     function getCertificateUpdate(Request $request)
     {
-        return view('profile_cerupdate');
+        $cers = Certificate::where('user_id', Auth::id())->get();
+        return view('profile_cerupdate',['cers'=>$cers]);
     }
+
+    function postAdd(Request $request)
+    {
+        $cer = new Certificate();
+        $cer->user_id = Auth::id();
+        $cer->certificate = $request->certificate;
+        $cer->filename = $request->filename;
+        $cer->date = $request->date;
+        $cer->duration = $request->duration;
+        $cer->save();
+        return redirect()->route('certificate_update.get');
+    }
+
+    function getDelete_Cer(Request $request){
+        $cer = Certificate::where('certificate', $request->certificate);
+        $cer->delete();
+        return redirect()->route('certificate_update.get');
+    }
+
 
 }

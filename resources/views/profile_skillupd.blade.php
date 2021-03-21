@@ -31,64 +31,9 @@
 <div id="wrapper" 0="">
     <div class="d-flex flex-column" id="content-wrapper" style="height: 969px">
         <div id="content" style="background-color:white">
-            <nav class="navbar navbar-light navbar-expand topbar bg-white static-top" style="padding:0px">
-                <div class="container-fluid">
-
-                    <div type="button" id="exit" style="border: none;width: 15%"><h1  onclick="show()" id="logo" style="margin: 0px;height:70px;padding-left:1%;color:black;"
-                                                                                      class="shadow animated--grow-in">Logo</h1> </div>
-                    <ul class="nav navbar-nav flex-nowrap ml-auto">
-                        <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                            <div class="nav-item dropdown no-arrow show"><a class="dropdown-toggle nav-link"
-                                                                            data-toggle="dropdown" aria-expanded="true"
-                                                                            href="#" style="color:black">Home</a>
-
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       data-toggle="dropdown" aria-expanded="false"
-                                                                       href="#" style="color:black">About</a>
-
-                            </div>
-                            <div class="shadow dropdown-list dropdown-menu dropdown-menu-right"
-                                 aria-labelledby="alertsDropdown"></div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow" role="presentation">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       data-toggle="dropdown" aria-expanded="false"
-                                ><img
-                                            class="border rounded-circle img-profile"
-                                            src="{{asset('assets/img/avatars/avatar1.jpeg')}}"></a>
-                                <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                                    <a class="dropdown-item" role="presentation" href="{{route('profile.get')}}"><img
-                                                src="{{asset('assets/img/avatars/Capture5.PNG')}}" style="width:23px;height:22px">&nbsp;Profile</a>
-                                    <a class="dropdown-item" role="presentation" href="{{route('login.get')}}"><img
-                                                src="{{asset('assets/img/avatars/Capture5.PNG')}}" style="width:23px;height:22px">&nbsp;Log
-                                        out</a></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            @include('layouts.nav')
             <div id="management" style="margin-left: 1%">
-                <ul class="nav nav-tabs shadow animated--grow-in" id="services"
-                    style="display: none; background-color: white;">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="{{asset('assets/img/avatars/Capture5.PNG')}}"
-                                                          style="width:23px;height:22px">Home</a>
-                        <a class="nav-link" href="{{route('company.get')}}"><img src="{{asset('assets/img/avatars/Capture.PNG')}}"
-                                                                                 style="width:23px;height:22px">Company</a>
-                        <a class="nav-link" href="{{route('branch.get')}}"><img src="{{asset('assets/img/avatars/Capture2.PNG')}}"
-                                                                                style="width:23px;height:22px">Branch</a>
-                        <a class="nav-link" href="{{route('devision.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture3.PNG')}}" style="width:23px;height:22px">Devision</a>
-                        <a class="nav-link" href="{{route('project.get')}}"><img src="{{asset('assets/img/avatars/Capture4.PNG')}}"
-                                                                                 style="width:23px;height:22px">Project</a>
-                        <a class="nav-link" href="#"><img
-                                    src="{{asset('assets/img/avatars/Capture6.PNG')}}" style="width:25px;height:25px">Human Resources</a>
-                    </li>
-                    <li class="nav-item"></li>
-                </ul>
+                @include('layouts.menu')
 
                 <div id="phuong" class="phuong" style="width: 98%; margin-left: 0%; ">
                     <div id="all" style="width: 100%">
@@ -97,17 +42,7 @@
                         </div>
                     </div>
                     <div style="border-style: ridge;border-top-style: none">
-                        <div style="width: 96%;margin-left: 2%">
-                            <a href="">
-                                <button id="btn1" class="profile" type="button" >Information</button>
-                            </a>
-                            <a href="">
-                                <button id="btn2" class="profile" type="button" style="background-color: #2a88bd;margin-left: 0px">Skill</button>
-                            </a>
-                            <a href="">
-                                <button id="btn3" class="profile" type="button" style="margin-left: 0px;">Certificate</button>
-                            </a>
-                        </div>
+                        @include('layouts.profile')
                         <div style="width: 90%;margin-left: 5%; border-style: ridge; border-top-style: none">
                             <table style="margin-top: 20px;width: 100%;" class="table_1">
                                 <tr>
@@ -116,29 +51,52 @@
                                     <th>Skill note</th>
                                     <th>Experiences</th>
                                     <th>Note experience</th>
-                                    <th> Level</th>
                                     <th></th>
                                 </tr>
-                                <tr>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td><button type="button">Add</button> </td>
-                                </tr>
+                                @foreach( $skills as $skill)
+                                    <form method="get" action="{{route('post_skill.post')}}">
+                                    <tr>
+                                        <td><input name="type" value="{{$skill->sk_type}}" readonly></td>
+                                        <td><input name="name" value="{{$skill->sk_name}}" readonly></td>
+                                        <td>{{$skill->sk_note}}</td>
+                                        <td>{{$skill->sk_experiences}}</td>
+                                        <td>{{$skill->sk_note_experiences}}</td>
+                                        <td><button type="submit" style="background-color: red" > Delete </button></td>
+                                    </tr>
+                                    </form>
+                                @endforeach
+                                <form method="post" action="{{route('post_skill')}}">
+                                    {{csrf_field()}}
+                                    <tr>
+                                        <td><select name="type" name="type">
+                                                <option selected disabled hidden>Select skill</option>
+                                                <option>Programming language</option>
+                                                <option>Framework</option>
+                                                <option>Tester</option>
+                                            </select></td>
+                                        <td><input type="text" name="name" placeholder="Skill name" required></td>
+                                        <td><input type="text" name="note" placeholder="Skill note" required></td>
+                                        <td><input type="text" name="experience" placeholder="Experience" required></td>
+                                        <td><input type="text" name="note_experience" placeholder="Experience note"
+                                                   required></td>
+                                        <td>
+                                            <button type="submit" style="background-color: #3c763d">Add</button>
+                                        </td>
+                                    </tr>
+                                </form>
                             </table>
 
-                            <div style="width: 96%;margin-left: 5%;margin-top: 30px">
-                                Last update :
-                            </div>
                         </div>
                         <div id="body_button" style="width: 300px;">
-                            <button type="submit" name="register" style="background-color: #2ab27b" onclick="myFunction4()"> Update
-                            </button>
-                            <a href="">
-                                <button type="button" name="back" style=" color: white; background-color: #000000"> Back</button>
+                            <a href="{{route('skill.get')}}">
+                                <button type="submit" name="register" style="background-color: #2ab27b"
+                                        onclick="myFunction4()"> Update
+                                </button>
+                            </a>
+                            <a href="{{route('skill.get')}}">
+                                <button type="button" name="back" style=" color: white; background-color: #000000">
+                                    Back
+                                </button>
                             </a>
                         </div>
 
