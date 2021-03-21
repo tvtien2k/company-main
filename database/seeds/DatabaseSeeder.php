@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use  App\Company;
 use  App\Branch;
+use App\User;
 use  App\Division;
 use  App\Project;
 
@@ -31,6 +32,10 @@ class DatabaseSeeder extends Seeder
         Project::unguard();
         $this->call(ProjectTableSeeder::class);
         Project::reguard();
+
+        User::unguard();
+        $this->call(UsersTableSeeder::class);
+        User::reguard();
 
     }
 }

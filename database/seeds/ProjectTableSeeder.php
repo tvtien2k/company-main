@@ -18,7 +18,6 @@ class ProjectTableSeeder extends Seeder
         for ($i = 0; $i < $limit; $i++) {
             DB::table('project')->insert([
                 'dvs_id' => "1",
-                'br_id' =>"1",
                 'pr_pm' => " Demo",
                 'pr_date' => $faker->date(),
                 'pr_name' => $faker ->name,

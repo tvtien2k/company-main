@@ -18,7 +18,7 @@ class CreateProjectTable extends Migration
             $table->increments('pr_id');
             $table->string('pr_name');
             $table->integer('dvs_id');
-            $table->integer('pr_pm');
+            $table->string('pr_pm');
             $table->date('pr_date');
             $table->string('pr_status')->nullable();
             $table->string('pr_quality')->nullable();
