@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Project Management</title>
     <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
@@ -11,9 +9,11 @@
     <link href="{{ asset('assets/css/untitled.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/bootstrap/js/fonts/fontawesome-all.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href={{ asset('css/company.css') }} rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <base href="{{asset('')}}">
     <script>
         function show() {
-
             var x = document.getElementById("services");
             if (x.style.display == 'none') {
                 x.style.display = "block";
@@ -22,139 +22,79 @@
                 x.style.display = "none";
                 document.getElementById("logo").removeAttribute("class");
             }
+        };
 
-        }
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
 </head>
-
 <body id="page-top">
 <div id="wrapper" 0="">
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content" style="background-color:white">
-            <nav class="navbar navbar-light navbar-expand topbar bg-white static-top" style="padding:0px">
-                <div class="container-fluid">
-
-                    <div type="button" id="exit" style="border: none;width: 15%;height: 70px"><h1 onclick="show()"
-                                                                                                  id="logo"
-                                                                                                  style="margin: 0px;height:70px;padding-left:1%;color:black;"
-                                                                                                  class="shadow animated--grow-in">
-                            Logo</h1></div>
-                    <ul class="nav navbar-nav flex-nowrap ml-auto">
-                        <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                            <div class="nav-item dropdown no-arrow show"><a class="dropdown-toggle nav-link"
-                                                                            data-toggle="dropdown" aria-expanded="true"
-                                                                            href="#" style="color:black">Home</a>
-
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       data-toggle="dropdown" aria-expanded="false"
-                                                                       href="#" style="color:black">About</a>
-
-                            </div>
-                            <div class="shadow dropdown-list dropdown-menu dropdown-menu-right"
-                                 aria-labelledby="alertsDropdown"></div>
-                        </li>
-                        <li class="nav-item dropdown no-arrow" role="presentation">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       data-toggle="dropdown" aria-expanded="false"
-                                                                       href="file:///C:/Users/Dell/Documents/index.html#"><img
-                                            class="border rounded-circle img-profile"
-                                            src="{{asset('assets/img/avatars/avatar1.jpeg')}}"></a>
-                                <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                                    <a class="dropdown-item" role="presentation" href="{{route('profile.get')}}"><img
-                                                src="{{asset('assets/img/avatars/Capture5.PNG')}}"
-                                                style="width:23px;height:22px">&nbsp;Profile</a>
-                                    <a class="dropdown-item" role="presentation" href="{{route('login.get')}}"><img
-                                                src="{{asset('assets/img/avatars/Capture5.PNG')}}"
-                                                style="width:23px;height:22px">&nbsp;Log
-                                        out</a></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            @include('layouts.nav')
             <div id="management" style="margin-left: 1%">
-                <ul class="nav nav-tabs shadow animated--grow-in" id="services"
-                    style="display: none; background-color: white;">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="{{asset('assets/img/avatars/Capture5.PNG')}}"
-                                                          style="width:23px;height:22px">Home</a>
-                        <a class="nav-link" href="{{route('company.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture.PNG')}}"
-                                    style="width:23px;height:22px">Company</a>
-                        <a class="nav-link" href="{{route('branch.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture2.PNG')}}"
-                                    style="width:23px;height:22px">Branch</a>
-                        <a class="nav-link" href="{{route('devision.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture3.PNG')}}" style="width:23px;height:22px">Devision</a>
-                        <a class="nav-link" href="{{route('project.get')}}"><img
-                                    src="{{asset('assets/img/avatars/Capture4.PNG')}}"
-                                    style="width:23px;height:22px">Project</a>
-                        <a class="nav-link" href="#"><img
-                                    src="{{asset('assets/img/avatars/Capture6.PNG')}}" style="width:25px;height:25px">Human
-                            Resources</a>
-                    </li>
-                    <li class="nav-item"></li>
-                </ul>
-
+                @include('layouts.menu')
                 <div id="phuong" class="phuong" style="width: 98%; margin-left: 0%">
                     <div id="all">
-
                         <div id="first_body">
                             Project Detail
                         </div>
                         <br> <br>
-
-                        <form action="" method="post">
+                        <form action="{{route('project_register.post')}}" method="post">
                             {{ csrf_field() }}
                             <table style="width: 50%">
                                 <tr>
                                     <td>Company</td>
-                                    <td><input type="text" style="width: 80px;color: gray" name="cpn_id"
-                                               value=""
-                                               readonly>
+                                    <td>
+                                        <input type="text" style="width: 80px;color: gray" name="cpn_id"
+                                               value="{{Auth::user()->division->branch->company->cpn_id}}" readonly>
                                         <input type="text" style="color: gray" name="cpn_name"
-                                               value=""
-                                               readonly></td>
+                                               value="{{Auth::user()->division->branch->company->cpn_name}}" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Branch <span style="font-family: 'Times New Roman'"> (Optional)</span></td>
-                                    <td><input type="text" style="width: 80px;color: gray" name="br_id"
-                                               value=""
-                                               readonly>
+                                    <td>
+                                        <input type="text" style="width: 80px;color: gray" name="br_id"
+                                               value="{{Auth::user()->division->branch->br_id}}" readonly>
                                         <input type="text" style="color: gray" name="br_name"
-                                               value=""
-                                               readonly></td>
+                                               value="{{Auth::user()->division->branch->br_name}}" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Division</td>
                                     <td>
-                                            <select name="division" onchange="getPM(this)" required>
-                                                <option hidden>Select Division</option>
-{{--                                                @foreach($divisions as $d)--}}
-{{--                                                    <option value="{{$d->code}}">{{$d->name}}</option>--}}
-{{--                                                @endforeach--}}
-                                            </select>
+                                        <select name="division" required id="dvs_id" onchange="getPM()">
+                                            <option hidden>Select Division</option>
+                                            @foreach($divisions as $division)
+                                                <option value="{{$division->dvs_id}}">{{$division->dvs_name}}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Project</td>
-                                    <td><input style="width: 300px" type="text" placeholder="Please enter Project name" name="name" required></td>
+                                    <td>
+                                        <input style="width: 300px" type="text" placeholder="Please enter Project name"
+                                               name="name" value="{{old('name')}}">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>PM</td>
-                                    <td><select name="pm"  >
-                                            <option hidden>Select PM</option>
-
+                                    <td>
+                                        <select id="pm_id" name="pm_id" onchange="getMember();" required>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Start Date</td>
-                                    <td><input type="text" placeholder="Please enter Start Date" name="start_date" required></td>
+                                    <td>
+                                        <input type="date" placeholder="Please enter Start Date" name="start_date">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Team member</td>
@@ -169,66 +109,87 @@
                                                 <th> Role</th>
                                                 <th></th>
                                             </tr>
+                                            <div id="member-infor">
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a href="#">
+                                                            <button type="submit" name="teamMember"
+                                                                    style="background-color: #c8441c">
+                                                                Delete
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </div>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
-                                                <td><select>
-                                                        <option>Demo</option>
-                                                    </select></td>
+                                                <td>
+                                                    <select name="member_id" id="member">
+                                                    </select>
+                                                </td>
                                                 <td></td>
                                                 <td></td>
-                                                <td><select>
-
-                                                        <option>LEADER</option>
-                                                        <option>BA</option>
-                                                        <option>TESTER</option>
-                                                        <option>QA</option>
-                                                        <option>DEVELOPER</option>
-                                                    </select></td>
-                                                <td><a href="#">
-                                                        <button type="button" style="background-color: #1cc88a">Add
-                                                        </button>
-                                                    </a></td>
+                                                <td>
+                                                    <select name="role" id="role">
+                                                        <option value="LEADER">LEADER</option>
+                                                        <option value="BA">BA</option>
+                                                        <option value="TESTER">TESTER</option>
+                                                        <option value="QA">QA</option>
+                                                        <option value="DEVELOPER">DEVELOPER</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button type="button" style="background-color: #1cc88a"
+                                                            onclick="addMember()">
+                                                        Add
+                                                    </button>
+                                                </td>
                                             </tr>
-
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Manage tool</td>
-                                    <td><input type="text" name="tool" placeholder="Please enter Tool" required>
-
+                                    <td>
+                                        <input type="text" name="tool" placeholder="Please enter Tool">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Documentation</td>
-                                    <td><input type="text" placeholder="Please enter documentation" name="documentation" required>
-
+                                    <td>
+                                        <input type="text" placeholder="Please enter documentation"
+                                               name="documentation">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Description</td>
-                                    <td><input name="description" placeholder="Please enter description" required></td>
+                                    <td>
+                                        <input name="description" placeholder="Please enter description">
+                                    </td>
                                 </tr>
-
-
                             </table>
-
                             <hr style="clear: both; margin-top: 60px">
-                            <div id="body_button" >
-                                <button type="submit" style="background-color: #2ab27b"> Register</button>
+                            <div id="body_button">
+                                <button type="submit" name="action" value="project" style="background-color: #2ab27b">
+                                    Register
+                                </button>
                                 <a href="">
                                     <button type="button" name="back" style=" color: white; background-color: #000000">
                                         Back
                                     </button>
                                 </a>
                             </div>
-
                         </form>
                     </div>
-
                 </div>
-
             </div>
-
             <script src="assets/js/jquery.min.js"></script>
             <script src="assets/bootstrap/js/bootstrap.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
@@ -237,27 +198,46 @@
     </div>
 </div>
 <script language="javascript">
-
     document.getElementById("exit").onclick = function () {
         document.getElementById("phuong").style.display = 'none';
     };
 
-</script>
-<script>
-    function getPM(sel) {
+    function getPM() {
+        var dvs_id = $("#dvs_id").val();
         $.ajax({
-            url: {{route('AjaxGetPM.get')}},
-            type: 'GET',
-            data: {
-                'code': sel.value,
-            },
-            success: function (data) {
-                alert(data)
+            type: "get",
+            url: "dashboard/ajax/pm/" + dvs_id,
+            success: function (res) {
+                $("#pm_id").html(res);
             }
         });
     }
 
+    function getMember() {
+        var dvs_id = $("#dvs_id").val();
+        var pm_id = $("#pm_id").val();
+        $.ajax({
+            type: "get",
+            url: "dashboard/ajax/member/" + dvs_id + "/" + pm_id,
+            success: function (res) {
+                $("#member").html(res);
+            }
+        });
+    }
 
+    function addMember() {
+        var dvs_id = $("#dvs_id").val();
+        var pm_id = $("#pm_id").val();
+        var mb_id = $("#member_id").val();
+        var role = $("#role").val();
+        $.ajax({
+            type: "get",
+            url: "dashboard/ajax/add-member/" + dvs_id + "/" + pm_id + "/" + mb_id + "/" + role,
+            success: function (res) {
+                $("#member-infor").html(res);
+            }
+        });
+    }
 </script>
 </body>
 </html>

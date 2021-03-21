@@ -29,12 +29,12 @@ class User extends Authenticatable
 
     public function division()
     {
-        return $this->belongsTo('App\Division', 'dvs_id');
+        return $this->belongsTo('App\Division', 'dvs_code');
     }
 
     public function project()
     {
-        return $this->belongsTo('App\Project', 'pr_id');
+        return $this->belongsTo('App\Project', 'pr_code');
     }
 
     public function certificates()

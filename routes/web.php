@@ -31,7 +31,9 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     //Ajax
     Route::get('/ajax/company/{cpn_id}', 'AjaxController@getCompany')->name('ajax.company.get');
     Route::get('/ajax/branch/{cpn_id}/{br_id}', 'AjaxController@getBranch')->name('ajax.branch.get');
-    Route::get('/ajax/get-pm', 'ProjectController@getAjaxGetPM')->name('AjaxGetPM.get');
+    Route::get('/ajax/pm/{dvs_id}', 'AjaxController@getPM')->name('AjaxGetPM.get');
+    Route::get('/ajax/member/{dvs_id}/{pm_id}', 'AjaxController@getMember');
+    Route::get('/ajax/add-member/{dvs_id}/{pm_id}/{mb_id}/{role}', 'AjaxController@addMember');
 
     //Company ManagementRoute::group(['prefix'=>'/company'],function() {
     Route::get('/company', 'CompanyController@getCompany')->name('company.get');

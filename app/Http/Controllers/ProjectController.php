@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Division;
 use App\Project;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -33,5 +36,32 @@ class ProjectController extends Controller
         }
         $projects = $projects->orderBy('pr_name')->paginate(10);
         return view('project', ['projects' => $projects]);
+    }
+
+    function getRegister()
+    {
+        $division = Division::where('br_id', Auth::user()->division->branch->br_id)->get();
+        $users = User::where('dvs_code', Auth::user()->division->dvs_id)->get();
+        return view('project_register', ['divisions' => $division, 'users' => $users]);
+    }
+
+    function postRegister(Request $request)
+    {
+        switch ($request->input('action')) {
+            case 'teamMember':
+                $member = User::find($request->member_id);
+                if (!session('members')) {
+                    session(['members' => [$member]]);
+                } else {
+                    $arr = session('members');
+                    array_push($arr, $member);
+                    session(['members' => $arr]);
+                }
+                return back()->withInput();
+
+            case 'project':
+                // Preview model
+                break;
+        }
     }
 }
