@@ -16,8 +16,8 @@ class Project extends Model
         return $this->belongsTo('App\Division', 'dvs_id');
     }
 
-    public function users()
+    public function pm()
     {
-        return $this->hasMany('App\User', 'pr_code', 'br_id');
+        return $this->belongsTo('App\User', 'pr_pm');
     }
 }
