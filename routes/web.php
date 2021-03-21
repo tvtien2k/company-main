@@ -84,9 +84,13 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
 
     Route::get('/profile_skill', 'ProfileController@getSkill')->name('skill.get');
     Route::get('/profile_skill/update', 'ProfileController@getSkillUpdate')->name('skill_update.get');
+    Route::post('/skill/add','ProfileController@postSkill')->name('post_skill');
+    Route::get('/skill/delete','ProfileController@postDelete')->name('post_skill.post');
 
 
     Route::get('/profile_certificate', 'ProfileController@getCertificate')->name('certificate.get');
     Route::get('/profile_certificate/update', 'ProfileController@getCertificateUpdate')->name('certificate_update.get');
+    Route::post('/certificate/add','ProfileController@postAdd')->name('add.post');
+    Route::get('/certificate/delete','ProfileController@getDelete_Cer')->name('delete.get');
 
 });
